@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FaGithubAlt, FaPlus, FaSpinner } from 'react-icons/fa'
 import api from '../../services/api'
-import { Container, Form, SubmitButton } from './styles'
+import { Container, Form, SubmitButton, List} from './styles'
 
 export default class Main extends Component {
     constructor(props) {
@@ -12,6 +12,23 @@ export default class Main extends Component {
             loading: false,
         };
     }
+
+    componentDidMount() {
+        const repositories = localStorage.getItem('repositories');
+
+        if (repositories) {
+            this.setState({ repositories: JSON.parse(repositories)});
+        }
+
+    };
+
+    componentDidUpdate(prevProps, prevState) {
+        const { repositories } = this.state;
+
+        if (prevState.repositories !== repositories) {
+            localStorage.setItem('repositories', JSON.stringify(repositories))
+        }
+    };
 
     handleInputChange = event => {
         this.setState({ newRepository: event.target.value })
@@ -36,7 +53,7 @@ export default class Main extends Component {
     };
 
     render() {
-        const { newRepository, loading } = this.state;
+        const { newRepository, repositories, loading } = this.state;
 
         return (
         <Container>
@@ -57,6 +74,15 @@ export default class Main extends Component {
 
                 </SubmitButton>
             </Form>
+
+            <List>
+                {repositories.map(repository => (
+                    <li key={repository.name}>
+                        <span>{repository.name}</span>
+                        <a href="">Details</a>
+                    </li>
+                ))}
+            </List>
         </Container>
     );}
 };
