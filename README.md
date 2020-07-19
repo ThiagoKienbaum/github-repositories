@@ -17,6 +17,11 @@
 ## Built with
 * JavaScript
 * React
+    - Babel
+    - Webpack
+* Code quality
+    - EsLint
+    - Prettier
 
 ## Meta
 
