@@ -12,7 +12,7 @@
 
 # github-repositories
 
-> This project is a backend API REST, develop to be a transport company app.
+> This project is app to see issues on github repositories.
 
 ## Built with
 * JavaScript
